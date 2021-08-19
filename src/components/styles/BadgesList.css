@@ -1,0 +1,70 @@
+
+.BadgesList ul>li {
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: none; 
+  box-shadow: 0px 0px 7px 3px #ffe919;
+  background: #000000;
+  
+}
+
+.BadgesList ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+@media screen and (max-width: 950px) {
+  .BadgesList ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 620px) {
+  .BadgesList ul {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .Badges__container {
+    max-width: 300px;
+}
+}
+@media screen and (max-width: 475px) {
+  .BadgesList ul {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .Badges__container {
+    max-width: 300px;
+}
+}
+
+.BadgesListItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 280px;
+  height: 500px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.BadgesListItem__avatar {
+  border-radius: 10px;
+  background: #a3a3a3;
+  width: 100%;
+  height: auto;
+}
+
+.Badges-info {
+  display: flex;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.Info-line {
+  line-height: 3px;
+}
