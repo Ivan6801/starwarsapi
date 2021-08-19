@@ -1,22 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {Suspense, lazy} from 'react';
 
 import './styles/Badges.css';
 import BadgesList from '../components/BadgesList';
+import PageLoading from '../components/PageLoading';
+
+const Loading = lazy(()=>import('../components/PageLoading'));
 
 class Badges extends React.Component {
   constructor(props) {
     super(props);
-    console.log('1. constructor()');
+    console.log('Constructor');
 
     this.state = {
+      loading: true,
       data: [],
     };
   }
 
   componentDidMount() {
-    console.log('3. componentDidMount()');
-
+    console.log('componentDidMount()');
     this.timeoutId = setTimeout(() => {
       this.setState({
         data: [
@@ -150,13 +152,76 @@ class Badges extends React.Component {
             avatarUrl:
               'https://media.contentapi.ea.com/content/dam/star-wars-battlefront-2/images/2019/08/swbf2-refresh-hero-large-heroes-page-lando-16x9-xl.jpg.adapt.crop1x1.320w.jpg',
           },
+          {
+            id: '11',
+            name: "C-3PO",
+            height: "167",
+            mass: "75",
+            hair_color: "n/a",
+            skin_color: "gold",
+            eye_color: "yellow",
+            birth_year: "112BBY",
+            gender: "n/a",
+            avatarUrl:
+              'https://staticdelivery.nexusmods.com/mods/2229/images/thumbnails/4170/4170-1599160324-758762030.png',
+          },
+          {
+            id: '12',
+            name: "R2-D2",
+            height: "96",
+            mass: "32",
+            hair_color: "n/a",
+            skin_color: "white, blue",
+            eye_color: "black",
+            birth_year: "33BBY",
+            gender: "n/a",
+            avatarUrl:
+              'https://i.pinimg.com/originals/de/5d/0f/de5d0f46e06ea86363335066b88e42c4.jpg',
+          },
+          {
+            id: '13',
+            name: "Bossk",
+            height: "190",
+            mass: "113",
+            hair_color: "none",
+            skin_color: "green",
+            eye_color: "red",
+            birth_year: "53BBY",
+            gender: "male",
+            avatarUrl:
+              'https://i.redd.it/816nlmyvskr51.jpg',
+          },
+          {
+            id: '14',
+            name: "Grievous",
+            height: "216",
+            mass: "159",
+            hair_color: "none",
+            skin_color: "brown, white",
+            eye_color: "green, yellow",
+            birth_yea: "unknown",
+            gender: "male",
+            avatarUrl:
+              'https://media.contentapi.ea.com/content/dam/star-wars-battlefront-2/images/2019/08/swbf2-refresh-hero-large-heroes-page-grievous-16x9-xl.jpg.adapt.crop1x1.320w.jpg',
+          },
         ],
       });
-    }, 500);
+    }, 2000);
+    setTimeout(() => {
+      console.log('loading');
+      var loader = document.querySelector('.Loading')
+      loader.style.color = "red";
+    }, 100);
+    setTimeout(() => {
+      var loader = document.querySelector('.Loading')
+      loader.style.display = "none";
+    }, 2000);
   }
+  
+
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('5. componentDidUpdate()');
+    console.log('componentDidUpdate()');
     console.log({
       prevProps: prevProps,
       prevState: prevState,
@@ -169,12 +234,17 @@ class Badges extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('6. componentWillUnmount');
+    console.log('componentWillUnmount');
     clearTimeout(this.timeoutId);
   }
 
   render() {
-    console.log('2/4. render()');
+    console.log('render()');
+
+    // if (this.state.loading === true) {
+    //   return <PageLoading />;
+    // }
+
     return (
       <React.Fragment>
         <br/>
@@ -183,6 +253,7 @@ class Badges extends React.Component {
         <br />
 
         <div className="Badges__container">
+          <h3 className="Loading"><PageLoading /></h3>
           <BadgesList badges={this.state.data} />
         </div>
       </React.Fragment>
